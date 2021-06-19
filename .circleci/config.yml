@@ -34,8 +34,6 @@ jobs:
           name: Run tests
           command: npm test
    deploy:
-    docker:
-      - image: 'cimg/base:stable'
     steps:
       - run: echo "deploy my app"
       - slack/notify:
@@ -46,8 +44,6 @@ jobs:
           event: pass
           template: success_tagged_deploy_1
   test:
-    docker:
-      - image: 'cimg/base:stable'
     steps:
       - run: echo "test my app"
 
