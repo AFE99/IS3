@@ -1,30 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import logo from './fa.png';
 import './App.css';
-import { suma } from './Utils';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-        
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
-
+import { producto } from './Utils';
 
 function App() {
   const [numA, setNumA] = useState(0);
@@ -32,26 +9,24 @@ function App() {
   const [total, setTotal] = useState(0);
 
   const calcularResultado = useCallback(() => {
-    setTotal(suma(numA, numB));
+    setTotal(producto(numA, numB));
   }, [numA, numB]);
 
   return (
     <div className="App">
       <header className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
-        <p>
+        <h3>
           Project by Acevedo Fernando - Ing. Soft. UTN FRRe <br /><br /><br />
-        </p>
+        </h3>
         <div>
-          <label>Numero A: </label>
+          <label style={{fontSize: 24, fontFamily :"cursive"}}>Numero 1: </label>
           <input
             value={numA}
             style={{fontSize: 24, width: 100, textAlign: 'center'}}
             onChange={(e) => setNumA(+e.target.value)}
           />
-        </div>
-        <div>
-          <label>Numero B: </label>
+          <label style={{fontSize: 24, fontFamily :"cursive"}}>  Numero 2: </label>
           <input
             value={numB}
             style={{fontSize: 24, width: 100, textAlign: 'center'}}
@@ -60,14 +35,14 @@ function App() {
         </div>
         <div>
           <button
-            style={{fontSize: 24, margin: '40px 0'}}
+            style={{fontSize: 24, margin: '40px 0', padding: '3px', fontFamily :"cursive"}}
             onClick={calcularResultado}
           >
-            Sumar
+            Multiplicar
           </button>
         </div>
         <div>
-          <label>Resultado: </label>
+          <label style={{fontSize: 24, fontFamily :"cursive"}}>Resultado: </label>
           <input
             value={total}
             style={{fontSize: 24, width: 100, textAlign: 'center', backgroundColor: 'white'}}

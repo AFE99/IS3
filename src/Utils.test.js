@@ -1,7 +1,7 @@
-import { suma } from './Utils';
+import { producto } from './Utils';
 
-test('suma bien', () => {
-  expect(suma(0, 2)).toBe(2);
-  expect(suma(2, 0)).toBe(2);
-  expect(suma(2, 2)).toBe(4);
+test('producto', () => {
+  expect(producto(2, 2)).toBe(4);
+  expect(producto(3, 4)).toBe(12);
+  expect(producto(9, 0)).toBe(0);
 });
