@@ -66,9 +66,8 @@ workflows:
       # For running simple node tests, you could optionally use the node/test job from the orb to replicate and replace the job above in fewer lines.
       # - node/test
   heroku_deploy:
-    jobs:
-      - heroku/deploy-via-git
     send-notification:
       jobs:
+        - heroku/deploy-via-git
         - notify:
             context: slack-secrets
