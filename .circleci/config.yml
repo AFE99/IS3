@@ -9,25 +9,36 @@ orbs:
   node: circleci/node@4.1
   heroku: circleci/heroku@0.0.10
   slack: circleci/slack@4.4.2
-
+  sonarcloud: sonarsource/sonarcloud@1.0.2
 
 jobs:
-  deploy:
+  # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
+  build-and-test:  
+    # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
+    # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/node
     docker:
-      - image: 'cimg/base:stable'
+      - image: cimg/node:15.1
+    # Then run your tests!!
+    # CircleCI will report the results back to your VCS provider.
     steps:
-      - run: echo "deploy my app"
       - slack/notify:
-          event: fail
-          mentions: '@EngineeringTeam'
-          template: basic_fail_1
-      - slack/notify:
-          event: pass
-          template: success_tagged_deploy_1
-  test-heroku:
-    docker:
-      - image: 'cimg/base:stable'
-    steps:
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "plain_text",
+                      "text": "Start Building...",
+                      "emoji": true
+                    }
+                  ]
+                }
+              ]
+            }
+          event: always
       # Checkout the code as the first step.
       - checkout
       # Next, the node orb's install-packages step will install the dependencies from a package.json.
@@ -39,19 +50,36 @@ jobs:
       - run:
           name: Run tests
           command: npm test
+      - heroku/deploy-via-git
+      - slack/notify:
+          event: fail
+          mentions: '@nico'
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
+  build:
+    docker:
+      - image: cimg/node:15.1
+    steps:
+      - checkout
+      - sonarcloud/scan
       
-
-
 workflows:
-  test-and-deploy:
+  # Below is the definition of your workflow.
+  # Inside the workflow, you provide the jobs you want to run, e.g this workflow runs the build-and-test job above.
+  # CircleCI will run this workflow on every commit.
+  # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows
+  sample: 
     jobs:
-      - test-heroku
-      - slack/on-hold:
+      - build-and-test:
           context: slack-secrets
           filters:
             tags:
               only: /^v.*/
-          requires:
-            - test-heroku
-      - deploy:
-        - heroku/deploy-via-git
+      # For running simple node tests, you could optionally use the node/test job from the orb to replicate and replace the job above in fewer lines.
+      # - node/test
+  main:
+    jobs:
+      - build:
+          context: sonarcloud
