@@ -38,7 +38,7 @@ function App() {
             style={{fontSize: 24, margin: '40px 0', padding: '3px', fontFamily :"cursive"}}
             onClick={calcularResultado}
           >
-            Multiplicar
+            Multiplicarr
           </button>
         </div>
         <div>
