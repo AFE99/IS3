@@ -46,7 +46,7 @@ jobs:
                   "fields": [
                     {
                       "type": "plain_text",
-                      "text": "*This is a text notification*",
+                      "text": "*Notificacion que se ejecuta siempre :thumbsup:*",
                       "emoji": true
                     }
                   ]
