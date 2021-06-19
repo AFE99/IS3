@@ -25,11 +25,12 @@ jobs:
           event: pass
           template: success_tagged_deploy_1
   test:
-    - heroku/deploy-via-git
+    
     docker:
       - image: 'cimg/base:stable'
     steps:
       - run: echo "test my app"
+      - heroku/deploy-via-git
 
 
 workflows:
