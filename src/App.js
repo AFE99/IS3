@@ -43,7 +43,6 @@ function App() {
         </div>
         <div>
           <label style={{fontSize: 24, fontFamily :"cursive"}}>Resultado: </label>
-          <label style={{fontSize: 24, fontFamily :"cursive"}}>Resultado: </label>
           <input
             value={total}
             style={{fontSize: 24, width: 100, textAlign: 'center', backgroundColor: 'white'}}
