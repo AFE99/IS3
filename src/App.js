@@ -26,7 +26,7 @@ function App() {
             style={{fontSize: 24, width: 100, textAlign: 'center'}}
             onChange={(e) => setNumA(+e.target.value)}
           />
-          <label style={{fontSize: 24, fontFamily :"cursive"}}>  Numero 2: </label>
+          <label style={{fontSize: 24, fontFamily :"cursive", marginLeft: 30}}>  Numero 2: </label>
           <input
             value={numB}
             style={{fontSize: 24, width: 100, textAlign: 'center'}}
