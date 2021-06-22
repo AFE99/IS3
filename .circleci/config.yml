@@ -83,3 +83,4 @@ workflows:
     jobs:
       - build:
           context: sonarcloud
+          require: sample
