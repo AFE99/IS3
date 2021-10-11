@@ -1,3 +1,8 @@
+# Creating a development enviroment
+Tecnologías aplicadas: Git&Github, Circleci, Heroku, Gmail & Slack, Sonarcloud
+https://app-is3.herokuapp.com
+Video explicativo: https://www.youtube.com/watch?v=uP30T33LPAE&t=79s
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
